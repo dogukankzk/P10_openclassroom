@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
@@ -8,9 +7,8 @@ function Login() {
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
-    event.preventDefault(); // Empêche le rechargement de la page
-    // Logique de validation ici si besoin
-    navigate('/user'); // Redirige vers la page utilisateur
+    event.preventDefault(); 
+    navigate('/user'); 
   };
 
   return (

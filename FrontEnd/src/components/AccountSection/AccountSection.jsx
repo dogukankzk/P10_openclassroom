@@ -1,4 +1,3 @@
-import React from 'react';
 import './AccountSection.css';
 
 function AccountSection({ title, amount, description }) {

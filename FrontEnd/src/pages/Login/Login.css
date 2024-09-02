@@ -76,3 +76,6 @@ html, body {
     background-color: #009f67;
   }
   
+  .sign-in-content .fa-user-circle{
+    margin: 0;
+  }
