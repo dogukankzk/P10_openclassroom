@@ -1,7 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
-import Login from './pages/Login/Login'
-import UserPage from './pages/UserPage/UserPage'
+import Login from './pages/Login/Login';
+import UserPage from './pages/UserPage/UserPage';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 function App() {
   return (
@@ -9,7 +11,14 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/user" element={<UserPage />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <UserPage />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );
