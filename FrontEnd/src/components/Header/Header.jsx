@@ -4,7 +4,7 @@ import { logout } from '../../store/authSlice';
 
 const Header = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); 
-  const firstName = useSelector((state) => state.auth.firstName); 
+  const userName = useSelector((state) => state.auth.userName); 
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -22,7 +22,7 @@ const Header = () => {
           <>
             {/* Afficher le prénom de l'utilisateur connecté */}
             <i className="fa fa-user-circle user-circle-out"></i>
-            <span className="main-nav-item username"> {firstName}</span>
+            <span className="main-nav-item username"> {userName}</span>
             <Link className="main-nav-item" onClick={handleLogout}>
             <i className="fa fa-sign-out"></i> Sign Out
             </Link>

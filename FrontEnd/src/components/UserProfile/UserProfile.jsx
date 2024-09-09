@@ -1,17 +1,18 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux'; // Pour interagir avec le store Redux
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUserName } from '../../store/authSlice';
 import './UserProfile.css';
 
 function UserProfile() {
   const dispatch = useDispatch();
   
-  // Récupère le prénom et le nom depuis le store Redux
+  // Récupère les informations utilisateur depuis le store Redux
   const firstNameFromStore = useSelector((state) => state.auth.firstName);
   const lastNameFromStore = useSelector((state) => state.auth.lastName);
+  const userNameFromStore = useSelector((state) => state.auth.userName);
 
   const [isEditing, setIsEditing] = useState(false);
-  const [firstName, setFirstName] = useState(firstNameFromStore); // Utilise le prénom du store
-  const [lastName, setLastName] = useState(lastNameFromStore); // Utilise le nom du store
+  const [userName, setUserName] = useState(userNameFromStore); // Utilise le nom d'utilisateur du store
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -19,15 +20,13 @@ function UserProfile() {
 
   const handleSaveClick = (e) => {
     e.preventDefault();
+    dispatch(updateUserName(userName)); // Envoie le nouveau nom d'utilisateur à l'API
     setIsEditing(false);
-    
-    // Ici, tu peux envoyer les changements au store Redux ou à l'API pour sauvegarder les modifications
   };
 
   const handleCancelClick = () => {
     setIsEditing(false);
-    setFirstName(firstNameFromStore); // Réinitialise les valeurs au prénom et nom du store
-    setLastName(lastNameFromStore);
+    setUserName(userNameFromStore); // Réinitialise les valeurs au userName du store
   };
 
   return (
@@ -39,8 +38,9 @@ function UserProfile() {
             <input
               type="text"
               id="firstName"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              value={firstNameFromStore}
+              disabled // Rend le champ non modifiable
+              className="disabled-input" // Classe CSS pour appliquer le style grisé
             />
           </div>
           <div className="input-wrapper">
@@ -48,8 +48,18 @@ function UserProfile() {
             <input
               type="text"
               id="lastName"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              value={lastNameFromStore}
+              disabled // Rend le champ non modifiable
+              className="disabled-input" // Classe CSS pour appliquer le style grisé
+            />
+          </div>
+          <div className="input-wrapper">
+            <label htmlFor="userName">User Name</label>
+            <input
+              type="text"
+              id="userName"
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
             />
           </div>
           <button type="submit" className="save-button">Save</button>
@@ -57,8 +67,8 @@ function UserProfile() {
         </form>
       ) : (
         <>
-          <h1>Welcome back<br />{firstName} {lastName}!</h1>
-          <button className="edit-button" onClick={handleEditClick}>Edit Name</button>
+          <h1>Welcome back<br />{userName}!</h1>
+          <button className="edit-button" onClick={handleEditClick}>Edit user info</button>
         </>
       )}
     </div>

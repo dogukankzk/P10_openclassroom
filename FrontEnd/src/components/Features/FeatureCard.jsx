@@ -1,6 +1,6 @@
 import './FeatureCard.css';
 
-function FeatureCard({ icon, title, description }) {
+function FeatureCard({icon, title, description}) {
   return (
     <div className="feature-item">
       <img src={icon} alt={`${title} Icon`} className="feature-icon" />

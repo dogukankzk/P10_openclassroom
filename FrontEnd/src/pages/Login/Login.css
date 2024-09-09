@@ -13,7 +13,7 @@ html, body {
   .login-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 80vh;
   }
   
   .main {
@@ -70,6 +70,7 @@ html, body {
     border-radius: 4px;
     cursor: pointer;
     margin-top: 1rem;
+    text-decoration: underline;
   }
   
   .sign-in-button:hover {
@@ -78,4 +79,9 @@ html, body {
   
   .sign-in-content .fa-user-circle{
     margin: 0;
+  }
+
+  .remember-me {
+    display: flex;
+    width: auto;
   }

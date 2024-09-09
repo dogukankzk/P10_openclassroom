@@ -7,6 +7,7 @@ import './Login.css';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false); // État pour la case "Remember Me"
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -15,7 +16,8 @@ function Login() {
     try {
       const result = await dispatch(loginUser({ email, password })).unwrap();
       console.log('Login successful:', result);
-      navigate('/profile'); 
+      // Aucune action n'est nécessaire pour "Remember Me" ici, c'est juste visuel
+      navigate('/profile');
     } catch (error) {
       console.error('Login failed:', error);
     }
@@ -45,6 +47,15 @@ function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+            </div>
+            <div className="input-remember">
+              <input
+                type="checkbox"
+                id="remember-me"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)} // Mise à jour de l'état de "Remember Me"
+              />
+              <label htmlFor="remember-me">Remember me</label>
             </div>
             <button className="sign-in-button" type="submit">Sign In</button>
           </form>
