@@ -1,10 +1,17 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'; // Pour interagir avec le store Redux
 import './UserProfile.css';
 
 function UserProfile() {
+  const dispatch = useDispatch();
+  
+  // Récupère le prénom et le nom depuis le store Redux
+  const firstNameFromStore = useSelector((state) => state.auth.firstName);
+  const lastNameFromStore = useSelector((state) => state.auth.lastName);
+
   const [isEditing, setIsEditing] = useState(false);
-  const [firstName, setFirstName] = useState('Tony');
-  const [lastName, setLastName] = useState('Jarvis');
+  const [firstName, setFirstName] = useState(firstNameFromStore); // Utilise le prénom du store
+  const [lastName, setLastName] = useState(lastNameFromStore); // Utilise le nom du store
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -13,11 +20,14 @@ function UserProfile() {
   const handleSaveClick = (e) => {
     e.preventDefault();
     setIsEditing(false);
-    // Ici tu pourrais ajouter la logique pour sauvegarder les changements (API call par exemple)
+    
+    // Ici, tu peux envoyer les changements au store Redux ou à l'API pour sauvegarder les modifications
   };
 
   const handleCancelClick = () => {
     setIsEditing(false);
+    setFirstName(firstNameFromStore); // Réinitialise les valeurs au prénom et nom du store
+    setLastName(lastNameFromStore);
   };
 
   return (

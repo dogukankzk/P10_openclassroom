@@ -39,19 +39,16 @@
     margin-right: 5.2px;
 }
 
-.user-name {
-  margin-right: 1rem;
+.username {
+  margin-right: 12px;
   font-weight: bold;
   color: #2c3e50;
   cursor: pointer;
-
-}
-
-.fa-user-circle{
-  margin-right: 5px;
 }
 
 .fa-sign-out {
-  margin-right: 4px;
-  font-size: 15px;
+  font-size: 14px;
+}
+span{
+  margin: 0;
 }

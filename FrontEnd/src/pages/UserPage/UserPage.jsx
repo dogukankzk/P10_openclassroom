@@ -1,15 +1,11 @@
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 import UserProfile from '../../components/UserProfile/UserProfile';
 import AccountSection from '../../components/AccountSection/AccountSection';
 import './UserPage.css';
 
 function UserPage() {
-  const userName = "Tony"; // Nom de l'utilisateur connecté
 
   return (
     <div className="user-page">
-      <Header isUserLoggedIn={true} userName={userName} />
       <main className="main bg-dark">
         <UserProfile />
         <h2 className="sr-only">Accounts</h2>
@@ -29,7 +25,6 @@ function UserPage() {
           description="Current Balance"
         />
       </main>
-      <Footer />
     </div>
   );
 }
