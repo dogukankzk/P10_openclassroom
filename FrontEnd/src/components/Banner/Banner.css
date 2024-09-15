@@ -1,7 +1,7 @@
 /* Banner.css */
 
-.hero {
-    background-image: url('/img_copy/bank-tree.jpeg'); /* Assure-toi que le chemin de l'image est correct */
+    .hero {
+    background-image: url('/img_copy/bank-tree.webp'); /* Assure-toi que le chemin de l'image est correct */
     background-position: 0 -50px;
     background-size: cover;
     background-repeat: no-repeat;

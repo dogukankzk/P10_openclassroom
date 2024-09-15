@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <nav className="main-nav">
       <Link className="main-nav-logo" to="/">
-        <img src="/img_copy/argentBankLogo.png" alt="Argent Bank Logo" className="main-nav-logo-image" />
+        <img src="/img_copy/argentBankLogo.webp" alt="Argent Bank Logo" className="main-nav-logo-image" />
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
       <div>
@@ -23,7 +23,7 @@ const Header = () => {
             {/* Afficher le prénom de l'utilisateur connecté */}
             <i className="fa fa-user-circle user-circle-out"></i>
             <span className="main-nav-item username"> {userName}</span>
-            <Link className="main-nav-item" onClick={handleLogout}>
+            <Link className="main-nav-item" onClick={handleLogout} to="/" >
             <i className="fa fa-sign-out"></i> Sign Out
             </Link>
           </>

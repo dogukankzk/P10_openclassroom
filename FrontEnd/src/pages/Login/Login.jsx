@@ -7,19 +7,30 @@ import './Login.css';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false); // État pour la case "Remember Me"
+  const [rememberMe, setRememberMe] = useState(false);
+  const [error, setError] = useState(''); // État pour les messages d'erreur
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!email || !password) {
+      setError('Veuillez entrer à la fois un email et un mot de passe');
+      return;
+    }
+
     try {
       const result = await dispatch(loginUser({ email, password })).unwrap();
-      console.log('Login successful:', result);
-      // Aucune action n'est nécessaire pour "Remember Me" ici, c'est juste visuel
+      console.log('Connexion réussie:', result);
       navigate('/profile');
     } catch (error) {
-      console.error('Login failed:', error);
+      // Affiche un message d'erreur si l'email ou le mot de passe est incorrect
+      if (error.message === 'Error: User not found!' || error.message === 'Error: Incorrect password!') {
+        setError('Email ou mot de passe incorrect. Veuillez réessayer.');
+      } else {
+        setError('Échec de la connexion. Veuillez vérifier vos identifiants.');
+      }
+      console.error('Échec de la connexion:', error);
     }
   };
 
@@ -28,7 +39,7 @@ function Login() {
       <main className="main bg-dark">
         <section className="sign-in-content">
           <i className="fa fa-user-circle sign-in-icon"></i>
-          <h1>Sign In</h1>
+          <h1>Sign in</h1>
           <form onSubmit={handleSubmit}>
             <div className="input-wrapper">
               <label htmlFor="email">Username</label>
@@ -53,11 +64,12 @@ function Login() {
                 type="checkbox"
                 id="remember-me"
                 checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)} // Mise à jour de l'état de "Remember Me"
+                onChange={(e) => setRememberMe(e.target.checked)}
               />
-              <label htmlFor="remember-me">Remember me</label>
+              <label htmlFor="remember-me">remember me</label>
             </div>
-            <button className="sign-in-button" type="submit">Sign In</button>
+            {error && <p className="error-message">{error}</p>} {/* Affiche le message d'erreur */}
+            <button className="sign-in-button" type="submit">Sign in</button>
           </form>
         </section>
       </main>

@@ -5,14 +5,13 @@ import './UserProfile.css';
 
 function UserProfile() {
   const dispatch = useDispatch();
-  
-  // Récupère les informations utilisateur depuis le store Redux
   const firstNameFromStore = useSelector((state) => state.auth.firstName);
   const lastNameFromStore = useSelector((state) => state.auth.lastName);
   const userNameFromStore = useSelector((state) => state.auth.userName);
 
   const [isEditing, setIsEditing] = useState(false);
-  const [userName, setUserName] = useState(userNameFromStore); // Utilise le nom d'utilisateur du store
+  const [userName, setUserName] = useState(userNameFromStore);
+  const [error, setError] = useState('');
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -20,6 +19,10 @@ function UserProfile() {
 
   const handleSaveClick = (e) => {
     e.preventDefault();
+    if (!userName) {
+      setError('veuillez entrer un username');
+      return;
+    }
     dispatch(updateUserName(userName)); // Envoie le nouveau nom d'utilisateur à l'API
     setIsEditing(false);
   };
@@ -39,8 +42,8 @@ function UserProfile() {
               type="text"
               id="firstName"
               value={firstNameFromStore}
-              disabled // Rend le champ non modifiable
-              className="disabled-input" // Classe CSS pour appliquer le style grisé
+              disabled
+              className="disabled-input"
             />
           </div>
           <div className="input-wrapper">
@@ -49,8 +52,8 @@ function UserProfile() {
               type="text"
               id="lastName"
               value={lastNameFromStore}
-              disabled // Rend le champ non modifiable
-              className="disabled-input" // Classe CSS pour appliquer le style grisé
+              disabled
+              className="disabled-input"
             />
           </div>
           <div className="input-wrapper">
@@ -62,13 +65,14 @@ function UserProfile() {
               onChange={(e) => setUserName(e.target.value)}
             />
           </div>
+          {error && <p className="error-message">{error}</p>} {/* Affiche le message d'erreur */}
           <button type="submit" className="save-button">Save</button>
           <button type="button" className="cancel-button" onClick={handleCancelClick}>Cancel</button>
         </form>
       ) : (
         <>
           <h1>Welcome back<br />{userName}!</h1>
-          <button className="edit-button" onClick={handleEditClick}>Edit user info</button>
+          <button className="edit-button" onClick={handleEditClick}>Edit Name</button>
         </>
       )}
     </div>
